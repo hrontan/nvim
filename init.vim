@@ -3,7 +3,6 @@ scriptencoding=utf-8
 
 syntax enable
 set number
-set clipboard=unnamedplus
 set smartindent
 set list
 set listchars=tab:>-,trail:-,extends:»,precedes:«,nbsp:%
@@ -19,53 +18,31 @@ set nowritebackup
 set noswapfile
 set mouse=
 
-
 "----------------------------------------
-" neobundle
+" dein.vim
 "----------------------------------------
-
-if has('vim_starting')
-	set runtimepath+=~/.config/nvim/bundle/neobundle.vim/
-endif
-call neobundle#begin(expand('~/.config/nvim/bundle/'))
-	NeoBundleFetch 'Shougo/neobundle.vim'
-	NeoBundle 'Shougo/deoplete.nvim'
-	NeoBundle 'Shougo/neosnippet'
-	NeoBundle 'Shougo/neosnippet-snippets'
-	NeoBundle 'honza/vim-snippets'
-	NeoBundleLazy 'jiangmiao/simple-javascript-indenter', {'autoload':{'filetypes':['javascript','html']}}
-	NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript','html']}}
-	NeoBundleLazy 'kana/vim-filetype-haskell', {'autoload':{'filetypes': ['haskell']}}
-	NeoBundleLazy 'ujihisa/neco-ghc', {'autoload':{'filetypes': ['haskell']}}
-	NeoBundle 'scrooloose/syntastic.git'
-	NeoBundle 'vim-scripts/autoload_cscope.vim'
-call neobundle#end()
-filetype plugin indent on
-
-NeoBundleCheck
-let g:deoplete#enable_at_startup = 1
-let g:syntastic_c_compiler = 'clang'
-let g:syntastic_c_compiler_options = ' -std=c11'
-let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = ' -std=c++11'
-let g:syntastic_python_python_exec = 'python3'
-let g:python_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/usr/bin/python3'
-if empty(neobundle#get("neosnippet"))
-	imap <C-s> <Plug>(neosnippet_expand_or_jump)
-	smap <C-s> <Plug>(neosnippet_expand_or_jump)
-	xmap <C-s> <Plug>(neosnippet_expand_target)
-	let g:neosnippet#enable_snipmate_compatibility = 1
-	let g:neosnippet#disable_runtime_snippets = {'_' : 1}
-	let g:neosnippet#snippets_directory = []
-	if ! empty(neobundle#get("vim-octopress-snippets"))
-		let g:neosnippet#snippets_directory += ['~/.nvim/bundle/vim-octopress-snippets/neosnippets']
-	endif
-	let g:neosnippet#snippets_directory += ['~/.nvim/bundle/neosnippet-snippets/neosnippets']
-	if ! empty(neobundle#get("vim-snippets"))
-	let g:neosnippet#snippets_directory += ['~/.nvim/bundle/vim-snippets/snippets']
+let s:dein_dir = expand('~/.cache/dein')
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
   endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 endif
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
+  let g:rc_dir    = expand('~/.config/nvim/rc')
+  let s:toml      = g:rc_dir . '/dein.toml'
+  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
+  call dein#load_toml(s:toml,      {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
+  call dein#end()
+  call dein#save_state()
+endif
+if dein#check_install()
+  call dein#install()
+endif
+filetype plugin indent on
 
 function! s:remove_dust()
 	let cursor = getpos('.')

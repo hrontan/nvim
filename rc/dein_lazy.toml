@@ -1,0 +1,48 @@
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+on_i = 1
+
+[[plugins]]
+repo = 'Shougo/neosnippet'
+on_i = 1
+depends = ['neosnippet-snippets', 'honza/vim-snippets']
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+on_i = 1
+
+[[plugins]]
+repo = 'honza/vim-snippets'
+on_i = 1
+
+[[plugins]]
+repo      = 'Shougo/neomru.vim'
+on_source = ['unite.vim']
+
+[[plugins]]
+repo      = 'thinca/vim-prettyprint'
+on_cmd    = ['PP', 'PrettyPrint']
+
+
+
+
+[[plugins]]
+repo  = 'Quramy/tsuquyomi'
+on_ft = ['typescript']
+
+[[plugins]]
+repo  = 'jiangmiao/simple-javascript-indenter'
+on_ft = ['javascript', 'html']
+
+[[plugins]]
+repo  = 'jelera/vim-javascript-syntax'
+on_ft = ['javascript', 'html']
+
+[[plugins]]
+repo  = 'kana/vim-filetype-haskell'
+on_ft = ['haskell']
+
+[[plugins]]
+repo  = 'ujihisa/neco-ghc'
+on_ft = ['haskell']
