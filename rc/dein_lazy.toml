@@ -4,16 +4,16 @@ repo = 'Shougo/deoplete.nvim'
 on_i = 1
 
 [[plugins]]
+repo = 'honza/vim-snippets'
+on_i = 1
+
+[[plugins]]
 repo = 'Shougo/neosnippet'
 on_i = 1
 depends = ['neosnippet-snippets', 'honza/vim-snippets']
 
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
-on_i = 1
-
-[[plugins]]
-repo = 'honza/vim-snippets'
 on_i = 1
 
 [[plugins]]
@@ -46,3 +46,8 @@ on_ft = ['haskell']
 [[plugins]]
 repo  = 'ujihisa/neco-ghc'
 on_ft = ['haskell']
+
+[[plugins]]
+repo  = 'derekwyatt/vim-scala'
+on_ft = ['scala']
+
